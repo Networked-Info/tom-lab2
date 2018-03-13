@@ -60,11 +60,12 @@ public class WordCount {
 		TextInputFormat.addInputPath(job, file3);
 		job.setOutputFormatClass(TextOutputFormat.class);
 		TextOutputFormat.setOutputPath(job, out);
-		job.setJarByClass(Driver.class);
-		job.setMapperClass(WikiMapper.class);
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
-		job.setReducerClass(WikiReducer.class);
+		job.setJarByClass(WordCount.class);
+	    job.setMapperClass(TokenizerMapper.class);
+	    job.setCombinerClass(IntSumReducer.class);
+	    job.setReducerClass(IntSumReducer.class);
+	    job.setOutputKeyClass(Text.class);
+	    job.setOutputValueClass(IntWritable.class);
 		job.waitForCompletion(true);
 	}
 }

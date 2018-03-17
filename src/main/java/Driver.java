@@ -31,9 +31,9 @@ public class Driver {
 	    wcjob.setCombinerClass(SumReducer.class);
 	    wcjob.setReducerClass(SumReducer.class);
 	    wcjob.setJobName("Word Count");
-	    TextInputFormat.addInputPath(wcjob, new Path("/Users/ronnyking01/Documents/132B/lab2/lab2_data"));
+	    TextInputFormat.addInputPath(wcjob, new Path(args[0]));
 	    wcjob.setOutputFormatClass(TextOutputFormat.class);
-		TextOutputFormat.setOutputPath(wcjob, new Path("/Users/ronnyking01/Documents/132B/output/wc"));
+		TextOutputFormat.setOutputPath(wcjob, new Path(args[1] + "/wc"));
 		wcjob.setOutputKeyClass(Text.class);
 		wcjob.setOutputValueClass(IntWritable.class);
 		wcjob.waitForCompletion(true);
@@ -48,9 +48,9 @@ public class Driver {
 	    swjob.setMapperClass(ThresholdMapper.class);
 	    swjob.setReducerClass(SimpleReducer.class);
 	    swjob.setJobName("Wordcount Process");
-	    TextInputFormat.addInputPath(swjob, new Path("/Users/ronnyking01/Documents/132B/output/wc"));
+	    TextInputFormat.addInputPath(swjob, new Path(args[1] + "/wc"));
 	    swjob.setOutputFormatClass(TextOutputFormat.class);
-		TextOutputFormat.setOutputPath(wcjob, new Path("/Users/ronnyking01/Documents/132B/output/temp"));
+		TextOutputFormat.setOutputPath(wcjob, new Path(args[1] + "/temp"));
 		swjob.setOutputKeyClass(Text.class);
 		swjob.setOutputValueClass(Text.class);
 		swjob.waitForCompletion(true);
